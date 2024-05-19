@@ -14,14 +14,12 @@ function StudentList() {
     async function fetchStudents() {
       try {
         const data = await getStudentsWithCourses();
-        console.log("Fetched students with courses:", data);
         setStudents(data);
       } catch (err) {
-        setError(`Failed to fetch students: ${err.message}`);
-        console.error(err);
-      } finally {
-        setLoading(false);
+        setError("Error fetching students with courses: ${err.message}");
+        console.log(err);
       }
+      setLoading(false);
     }
 
     fetchStudents();
@@ -65,16 +63,24 @@ function StudentList() {
             <th>Email</th>
             <th>Number</th>
             <th>Gender</th>
-            <th>Course</th>
+            <th>Courses</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {students.map((student) => {
             console.log("Rendering student:", student); // Debugging log
-            const coursesString = student.courses
-              ? student.courses.map((course) => course.course_name).join(", ")
-              : "No course";
+
+            // Validate and ensure the courses field is a string
+            let coursesString = "No course";
+            if (typeof student.courses === "string") {
+              coursesString = student.courses;
+            } else if (Array.isArray(student.courses)) {
+              coursesString = student.courses
+                .map((course) => course.course_name)
+                .join(", ");
+            }
+
             return (
               <tr key={student.student_id}>
                 <td>{`${student.firstname} ${student.lastname}`}</td>

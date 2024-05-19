@@ -1,5 +1,3 @@
-import { CourseStudent } from "./courseStudent";
-
 export interface Student {
   student_id: number;
   firstname: string;

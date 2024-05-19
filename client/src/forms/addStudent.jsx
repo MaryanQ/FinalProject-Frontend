@@ -1,4 +1,4 @@
-/*import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createStudent, getCourses } from "../services/ApiService";
 
@@ -9,8 +9,6 @@ const AddStudent = () => {
     email: "",
     gender: "",
     number: "",
-    course_id: "",
-    course_name: "",
   });
 
   const [courses, setCourses] = useState([]);
@@ -191,4 +189,4 @@ const AddStudent = () => {
   );
 };
 
-export default AddStudent;*/
+export default AddStudent;
